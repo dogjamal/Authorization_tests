@@ -1,3 +1,4 @@
+using Authorization_tests.PageObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -10,12 +11,8 @@ namespace Authorization_tests
     {
         private IWebDriver driver;
 
-        private readonly By _sign_in_button = By.Id("login");
-        private readonly By _login_input_button = By.XPath("//input[@type='email']");
-     //   private readonly By _continue_button = By.ClassName("VfPpkd-RLmnJb"); 
-        private readonly By _password_input_button = By.XPath("//input[@type='password']");
-        private readonly By _enter_button = By.Name("go");
-        private readonly By _user_login = By.XPath("//button[@title='test']");
+        
+       
 
 
         private const string _login = "test@mail.ru";
@@ -33,23 +30,14 @@ namespace Authorization_tests
         [Test]
         public void Test1()
         {
-            //  Assert.Pass();
-           var sign_in = driver.FindElement(_sign_in_button);
-            sign_in.Click();
-            
-            var login = driver.FindElement(_login_input_button);
-            login.SendKeys(_login);
+            var mainMenu = new MainMenuPageObjects(driver);
+            mainMenu
+                .sign_in()
+                .login(_login, _password);
 
-           // var continue_login = driver.FindElement(_continue_button);
-           // continue_login.Click();
+            string actual_login = mainMenu.get_user_login();
 
-            var password = driver.FindElement(_password_input_button);
-            password.SendKeys(_password);
-
-            var enter = driver.FindElement(_enter_button);
-            enter.Click();
-
-            Assert.AreEqual(_expected_login, _user_login, "login or enter was not done");
+            Assert.AreEqual(_expected_login, actual_login, "login or enter was not done");
         }
 
         [TearDown]
