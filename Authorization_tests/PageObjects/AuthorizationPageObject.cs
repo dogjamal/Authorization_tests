@@ -20,10 +20,11 @@ namespace Authorization_tests.PageObjects
             _driver = driver;
         }
 
-        public MainMenuPageObjects login(string login, string password)
+        public MainMenuPageObjects Login(string login, string password)
         {
             _driver.FindElement(_login_input_button).SendKeys(login);
             // _driver.FindElement(_continue_button).Click();
+            WaitUntil.Wait_element(_driver, _password_input_button);
             _driver.FindElement(_password_input_button).SendKeys(password);
             _driver.FindElement(_enter_button).Click();
 

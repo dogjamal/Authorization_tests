@@ -11,20 +11,18 @@ namespace Authorization_tests
     {
         private IWebDriver driver;
 
-        
-       
-
-
         private const string _login = "test@mail.ru";
         private const string _password = "vb";
         private const string _expected_login = "test";
+        private const string _url = "https://habr.com/ru/";
 
         [SetUp]
         public void Setup()
         {
             driver = new OpenQA.Selenium.Chrome.ChromeDriver();
-            driver.Navigate().GoToUrl("https://habr.com/ru/");
             driver.Manage().Window.Maximize();
+            driver.Navigate().GoToUrl(_url);
+            WaitUntil.Shoud_locate(driver, _url);
         }
 
         [Test]
@@ -32,10 +30,11 @@ namespace Authorization_tests
         {
             var mainMenu = new MainMenuPageObjects(driver);
             mainMenu
-                .sign_in()
-                .login(_login, _password);
+                .Sign_in()
+                .Login(_login, _password);
+             //   .Go_to_personal_account();
 
-            string actual_login = mainMenu.get_user_login();
+            string actual_login = mainMenu.Get_user_login();
 
             Assert.AreEqual(_expected_login, actual_login, "login or enter was not done");
         }
