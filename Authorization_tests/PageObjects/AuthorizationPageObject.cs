@@ -13,7 +13,9 @@ namespace Authorization_tests.PageObjects
         private readonly By _login_input_button = By.XPath("//input[@type='email']");
         //   private readonly By _continue_button = By.ClassName("VfPpkd-RLmnJb"); 
         private readonly By _password_input_button = By.XPath("//input[@type='password']");
-        private readonly By _enter_button = By.Name("go");
+      //  private readonly By _enter_button = By.Name("go");
+
+
 
         public AuthorizationPageObject(IWebDriver driver)
         {
@@ -26,7 +28,7 @@ namespace Authorization_tests.PageObjects
             // _driver.FindElement(_continue_button).Click();
             WaitUntil.Wait_element(_driver, _password_input_button);
             _driver.FindElement(_password_input_button).SendKeys(password);
-            _driver.FindElement(_enter_button).Click();
+         //   _driver.FindElement(_enter_button).Click();
 
             return new MainMenuPageObjects(_driver);
         }
