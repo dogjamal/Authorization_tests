@@ -32,5 +32,7 @@ namespace Authorization_tests.PageObjects
 
             return new MainMenuPageObjects(_driver);
         }
+
+
     }
 }

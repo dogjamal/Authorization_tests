@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Authorization_tests.PageObjects;
 using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace Authorization_tests.Tests
 {
@@ -12,21 +13,23 @@ namespace Authorization_tests.Tests
         private const string _login = "test@mail.ru";
         private const string _password = "vb";
         private const string _expected_login = "test";
-        /*
+        
         [Test]
-        public object Test()
+        public void Test_to_sign()
         {
-            var mainMenu = new MainMenuPageObjects(_driver);
-            mainMenu
+            var main_menu = new MainMenuPageObjects(_driver);
+            main_menu
                 .Sign_in()
                 .Login(_login, _password);
             // .Go_to_personal_account();
             //    .Service_lists;
 
-            string actual_login = mainMenu.Get_user_login();
+            Assert.Throws<NoSuchElementException>(() => main_menu.Sign_in());
+       
+            //   string actual_login = mainMenu.Get_user_login();
 
-            Assert.AreEqual(_expected_login, actual_login, "login or enter was not done");
+            //   Assert.AreEqual(_expected_login, actual_login, "login or enter was not done");
         }
-        */
+        
     }
 }
